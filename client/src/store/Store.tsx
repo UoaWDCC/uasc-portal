@@ -38,10 +38,18 @@ const actions = {
         currentUserData: userData,
         currentUserClaims: userClaims
       })
-      localStorage.setItem(
-        CACHED_USER_LOCAL_STORAGE_KEY,
-        JSON.stringify({ user, userData, userClaims })
-      )
+      /**
+       * For use when firebase starts up again
+       */
+      try {
+        // May throw `QuotaExceededError` in cases where user has disabled localStorage
+        localStorage.setItem(
+          CACHED_USER_LOCAL_STORAGE_KEY,
+          JSON.stringify({ user, userData, userClaims })
+        )
+      } catch (err) {
+        console.error("Unable to cache the user data", err)
+      }
     },
   resetCurrentUserState:
     (): Action<State> =>
