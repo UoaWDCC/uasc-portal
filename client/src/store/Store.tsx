@@ -7,7 +7,9 @@ import {
   createHook
 } from "react-sweet-state"
 
-type State = {
+export const CACHED_USER_LOCAL_STORAGE_KEY = "stored-user"
+
+export type State = {
   currentUser: User | null // firebase type
   currentUserData?: UserAdditionalInfo
   currentUserClaims?: UserClaims
@@ -36,11 +38,17 @@ const actions = {
         currentUserData: userData,
         currentUserClaims: userClaims
       })
+      localStorage.setItem(
+        CACHED_USER_LOCAL_STORAGE_KEY,
+        JSON.stringify({ user, userData, userClaims })
+      )
     },
   resetCurrentUserState:
     (): Action<State> =>
     ({ setState }) => {
       setState({ ...defaultUserState })
+
+      localStorage.removeItem(CACHED_USER_LOCAL_STORAGE_KEY)
     },
   refreshUserToken:
     (): Action<State> =>

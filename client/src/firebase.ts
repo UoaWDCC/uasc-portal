@@ -4,7 +4,11 @@ import { getFirestore, connectFirestoreEmulator } from "firebase/firestore"
 import { ParsedToken, getAuth } from "firebase/auth"
 import { UserClaims } from "models/User"
 import fetchClient, { setToken } from "services/OpenApiFetchClient"
-import { StoreInstance } from "store/Store"
+import {
+  CACHED_USER_LOCAL_STORAGE_KEY,
+  State,
+  StoreInstance
+} from "store/Store"
 import { MembershipPaymentStore } from "store/MembershipPayment"
 import queryClient from "services/QueryClient"
 import { BOOKING_AVAILABLITY_KEY } from "services/Booking/BookingQueries"
@@ -23,8 +27,21 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const db = getFirestore(app)
 
-// use emulator suite if running locally
+const cachedUser = localStorage.getItem(CACHED_USER_LOCAL_STORAGE_KEY)
+localStorage.removeItem(CACHED_USER_LOCAL_STORAGE_KEY)
+
+if (cachedUser) {
+  const parsedUser = JSON.parse(cachedUser) as State
+  const { currentUser, currentUserClaims, currentUserData } = parsedUser
+  StoreInstance.actions.setCurrentUser(
+    currentUser,
+    currentUserData,
+    currentUserClaims
+  )
+}
+
 if (import.meta.env.VITE_NODE_ENV !== "production") {
+  // use emulator suite if running locally
   connectFirestoreEmulator(db, "localhost", 8080)
 }
 
