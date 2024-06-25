@@ -27,9 +27,19 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const db = getFirestore(app)
 
+/**
+ * Try to optimistically load the user if they have been cached, which
+ * may improve UX on screens where the screen has been refreshed.
+ *
+ * Note that the user may not have an up to date token, so while they can view
+ * the correct views they may still experience delays in fetching data
+ */
 const cachedUser = localStorage.getItem(CACHED_USER_LOCAL_STORAGE_KEY)
 localStorage.removeItem(CACHED_USER_LOCAL_STORAGE_KEY)
 
+/**
+ * Store the user data into sweet state if it was cached
+ */
 if (cachedUser) {
   const parsedUser = JSON.parse(cachedUser) as State
   const { currentUser, currentUserClaims, currentUserData } = parsedUser
@@ -45,6 +55,10 @@ if (import.meta.env.VITE_NODE_ENV !== "production") {
   connectFirestoreEmulator(db, "localhost", 8080)
 }
 
+/**
+ * Makes sure that the user's data is always the latest in case
+ * something changes in the auth side of firebase
+ */
 auth.onIdTokenChanged(async (user) => {
   MembershipPaymentStore.actions.resetMembershipType()
 
