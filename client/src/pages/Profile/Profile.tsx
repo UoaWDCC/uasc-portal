@@ -8,6 +8,7 @@ import { signOut } from "firebase/auth"
 import { auth } from "firebase"
 import { DateUtils } from "components/utils/DateUtils"
 import { useEffect, useMemo } from "react"
+import Button from "components/generic/FigmaButtons/FigmaButton"
 
 const SignOutButton = () => {
   const navigate = useNavigate()
@@ -29,6 +30,10 @@ const SignOutButton = () => {
       </button>
     </div>
   )
+}
+
+const DeleteButton = () => {
+  return <Button>Delete</Button>
 }
 
 const determineUserSkiSnowboardStatus = (status: {
@@ -90,7 +95,11 @@ export default function Profile() {
             <div className="flex flex-col md:flex-row">
               <h2 className="text-dark-blue-100 left-0 top-0 col-span-4 grid italic">{`${currentUserData?.first_name} ${currentUserData?.last_name}`}</h2>
               <div className="max-w my-2 md:ml-auto">
-                <SignOutButton />
+                {currentUserClaims?.admin ? (
+                  <DeleteButton />
+                ) : (
+                  <SignOutButton />
+                )}
               </div>
             </div>
 
