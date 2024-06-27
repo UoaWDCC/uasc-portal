@@ -9,6 +9,7 @@ import Profile from "pages/Profile/Profile"
 import Register from "pages/Register/Register"
 import { Route, Routes } from "react-router-dom"
 import NoMatch from "pages/404"
+import AdminProfile from "pages/Admin/AdminProfile/AdminProfile"
 
 export const AllRoutes = () => (
   <Routes>
@@ -22,7 +23,10 @@ export const AllRoutes = () => (
       <Route path="bookings/*" element={<Booking />} />
       <Route path="profile" element={<Profile />} />
       <Route path="admin/*" element={<Admin />} />
-      <Route path="admin/members/user?id=<user-id>" element={} />
+      <Route
+        path="admin/members/user?id=<user-id>"
+        element={<AdminProfile />}
+      />
       <Route path="*" element={<NoMatch />} />
     </Route>
   </Routes>

@@ -61,7 +61,7 @@ const Field = ({
     </>
   )
 }
-export default function Profile() {
+export default function AdminProfile() {
   const [{ currentUserData }] = useAppData()
   const [{ currentUser }] = useAppData()
 
