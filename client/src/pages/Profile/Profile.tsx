@@ -199,12 +199,12 @@ export default function Profile() {
                   />
                 </ProfileInformationPanel>
                 <ProfileInformationPanel title="Current bookings">
-                  {currentUserClaims?.member ? (
+                  {currentUserClaims?.admin ? (
+                    <AdminBookingSection />
+                  ) : (
                     <div className="border border-black p-4">
                       Calender component waiting to be implemented{" "}
                     </div>
-                  ) : (
-                    <AdminBookingSection />
                   )}
                 </ProfileInformationPanel>
               </div>
