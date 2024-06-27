@@ -40,7 +40,7 @@ const DeleteButton = () => {
     flex flex-col items-center rounded-md border bg-white px-8 py-2 font-sans font-bold 
    hover:text-white enabled:border"
     >
-      <button className="uppercase" onClick={handleOnclick}>
+      <button className="uppercase" onClick={() => {}}>
         delete profile
       </button>
     </div>
