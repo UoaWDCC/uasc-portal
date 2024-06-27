@@ -93,7 +93,13 @@ export default function Profile() {
         <div className="py-8">
           <div className="grid-cols grid w-full ">
             <div className="flex flex-col md:flex-row">
-              <h2 className="text-dark-blue-100 left-0 top-0 col-span-4 grid italic">{`${currentUserData?.first_name} ${currentUserData?.last_name}`}</h2>
+              <h2 className="text-dark-blue-100 left-0 top-0 col-span-4 grid italic">
+                {`${currentUserData?.first_name} ${currentUserData?.last_name}`}
+              </h2>
+              {currentUserClaims?.admin && (
+                <h4 className="text-red mt-4 font-bold italic">Admin</h4>
+              )}
+
               <div className="max-w my-2 md:ml-auto">
                 {currentUserClaims?.admin ? (
                   <DeleteButton />
