@@ -9,6 +9,7 @@ import { auth } from "firebase"
 import { DateUtils } from "components/utils/DateUtils"
 import { useEffect, useMemo } from "react"
 import Button from "components/generic/FigmaButtons/FigmaButton"
+import AdminBookingDetails from "components/composite/Admin/AdminBookingDetails/AdminBookingDetails"
 
 const SignOutButton = () => {
   const navigate = useNavigate()
@@ -33,7 +34,17 @@ const SignOutButton = () => {
 }
 
 const DeleteButton = () => {
-  return <Button>Delete</Button>
+  return (
+    <div
+      className="border-red space-x-4; disabled:bg-gray-3 text-red hover:bg-red
+    flex flex-col items-center rounded-md border bg-white px-8 py-2 font-sans font-bold 
+   hover:text-white enabled:border"
+    >
+      <button className="uppercase" onClick={handleOnclick}>
+        delete profile
+      </button>
+    </div>
+  )
 }
 
 const determineUserSkiSnowboardStatus = (status: {
