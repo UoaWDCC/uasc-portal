@@ -22,6 +22,7 @@ export const AllRoutes = () => (
       <Route path="bookings/*" element={<Booking />} />
       <Route path="profile" element={<Profile />} />
       <Route path="admin/*" element={<Admin />} />
+      <Route path="admin/members/user?id=<user-id>" element={} />
       <Route path="*" element={<NoMatch />} />
     </Route>
   </Routes>
