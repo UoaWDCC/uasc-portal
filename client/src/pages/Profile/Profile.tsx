@@ -8,8 +8,7 @@ import { signOut } from "firebase/auth"
 import { auth } from "firebase"
 import { DateUtils } from "components/utils/DateUtils"
 import { useEffect, useMemo } from "react"
-import Button from "components/generic/FigmaButtons/FigmaButton"
-import AdminBookingDetails from "components/composite/Admin/AdminBookingDetails/AdminBookingDetails"
+import AdminBookingSection from "./AdminBookingSection"
 
 const SignOutButton = () => {
   const navigate = useNavigate()
@@ -200,9 +199,13 @@ export default function Profile() {
                   />
                 </ProfileInformationPanel>
                 <ProfileInformationPanel title="Current bookings">
-                  <div className="border border-black p-4">
-                    Calender component waiting to be implemented
-                  </div>
+                  {currentUserClaims?.member ? (
+                    <div className="border border-black p-4">
+                      Calender component waiting to be implemented{" "}
+                    </div>
+                  ) : (
+                    <AdminBookingSection />
+                  )}
                 </ProfileInformationPanel>
               </div>
             </div>
