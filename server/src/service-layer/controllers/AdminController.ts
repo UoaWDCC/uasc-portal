@@ -423,10 +423,20 @@ export class AdminController extends Controller {
         const membership: UserAccountTypes =
           authService.getMembershipType(customClaims)
 
+        const formattedDateJoined = metadata
+          ? new Date(metadata.creationTime).toLocaleString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit"
+            })
+          : undefined
+
         return {
           email,
           membership,
-          dateJoined: metadata ? metadata.creationTime : undefined,
+          dateJoined: formattedDateJoined,
           ...userInfo
         }
       })
