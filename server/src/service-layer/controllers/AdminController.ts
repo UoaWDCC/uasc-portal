@@ -37,6 +37,7 @@ import {
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Patch,
   Path,
@@ -790,6 +791,18 @@ export class AdminController extends Controller {
       this.setStatus(500)
     }
     this.setStatus(200)
+  }
+
+  @SuccessResponse("204", "Deleted single event")
+  @Delete("events/{id}")
+  public async deleteEvent(@Path() id: string) {
+    try {
+      const eventService = new EventService()
+      await eventService.deleteEvent(id)
+      this.setStatus(204)
+    } catch {
+      this.setStatus(500)
+    }
   }
 
   @SuccessResponse("200", "Successfully fetched the event")

@@ -153,6 +153,7 @@ export interface paths {
   };
   "/admin/events/{id}": {
     get: operations["GetEventById"];
+    delete: operations["DeleteEvent"];
     /** @description Endpoint for admints to edit an event. */
     patch: operations["EditEvent"];
   };
@@ -1254,6 +1255,19 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["GetEventResponse"];
         };
+      };
+    };
+  };
+  DeleteEvent: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Deleted single event */
+      204: {
+        content: never;
       };
     };
   };

@@ -2468,6 +2468,31 @@
 					}
 				}
 			},
+			"delete": {
+				"operationId": "DeleteEvent",
+				"responses": {
+					"204": {
+						"description": "Deleted single event"
+					}
+				},
+				"security": [
+					{
+						"jwt": [
+							"admin"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
 			"get": {
 				"operationId": "GetEventById",
 				"responses": {

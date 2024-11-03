@@ -881,4 +881,28 @@ describe("AdminController endpoint tests", () => {
       expect(res.body.error).toEqual("Event not found.")
     })
   })
+
+  describe("DELETE /admin/events/:id", () => {
+    const event1: Event = {
+      title: "UASC New event",
+      physical_start_date: dateToFirestoreTimeStamp(new Date()),
+      location: "UASC",
+      sign_up_start_date: dateToFirestoreTimeStamp(new Date()),
+      sign_up_end_date: dateToFirestoreTimeStamp(new Date())
+    }
+    const eventService = new EventService()
+
+    it("should delete existing event", async () => {
+      const { id: id1 } = await eventService.createEvent(event1)
+      const res = await request
+        .delete(`/admin/events/${id1}`)
+        .set("Authorization", `Bearer ${adminToken}`)
+        .send()
+      expect(res.status).toEqual(204)
+
+      const event = await eventService.getEventById(id1)
+
+      expect(event).not.toBeDefined()
+    })
+  })
 })
