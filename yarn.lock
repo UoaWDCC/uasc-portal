@@ -10904,7 +10904,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"client@workspace:client":
+"client@file:, client@workspace:client":
   version: 0.0.0-use.local
   resolution: "client@workspace:client"
   dependencies:
@@ -10935,6 +10935,7 @@ __metadata:
     "@types/react-csv": "npm:^1.1.10"
     "@types/react-dom": "npm:^18"
     "@types/scheduler": "npm:^0"
+    client: "file:"
     eslint: "npm:~8.57.0"
     firebase: "npm:^10.12.3"
     jest: "npm:^29.7.0"
@@ -21646,7 +21647,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"server@workspace:server":
+"server@file:, server@workspace:server":
   version: 0.0.0-use.local
   resolution: "server@workspace:server"
   dependencies:
@@ -21672,6 +21673,7 @@ __metadata:
     nodemailer: "npm:^6.9.14"
     nodemon: "npm:^3.1.0"
     pug: "npm:^3.0.3"
+    server: "file:"
     stripe: "npm:^14.22.0"
     supertest: "npm:^6.3.4"
     swagger-jsdoc: "npm:^6.2.8"

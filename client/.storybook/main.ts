@@ -23,7 +23,7 @@ const config: StorybookConfig = {
   core: {
     builder: "@storybook/builder-webpack5"
   },
-  webpackFinal: async (config) => {
+  webpackFinal: async (config, options) => {
     const imageRule = config.module?.rules?.find((rule) => {
       const test = (rule as { test: RegExp }).test
 
@@ -40,6 +40,9 @@ const config: StorybookConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"]
     })
+
+    //@ts-expect-error
+    options!.cache!.set = () => Promise.resolve()
 
     return config
   }
